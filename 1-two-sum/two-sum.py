@@ -1,12 +1,27 @@
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        seen = {}
+    def twoSum(self, nums, target):
+
+        # Store each number with its original index
+        arr = []
 
         for i in range(len(nums)):
+            arr.append((nums[i], i))
 
-            complement = target - nums[i]
+        # Sort by the number
+        arr.sort()
 
-            if complement in seen:
-                return [seen[complement], i]
+        left = 0
+        right = len(arr) - 1
 
-            seen[nums[i]] = i
+        while left < right:
+
+            current_sum = arr[left][0] + arr[right][0]
+
+            if current_sum == target:
+                return [arr[left][1], arr[right][1]]
+
+            elif current_sum < target:
+                left += 1
+
+            else:
+                right -= 1
