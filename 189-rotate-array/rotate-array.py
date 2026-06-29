@@ -4,22 +4,18 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         n = len(nums)
+
         k %= n
 
-        count = 0
-        start = 0
+        def reverse(left, right):
 
-        while count < n:
-            current = start
-            prev = nums[start]
+            while left < right:
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+                right -= 1
 
-            while True:
-                next_index = (current + k) % n
-                nums[next_index], prev = prev, nums[next_index]
-                current = next_index
-                count += 1
+        reverse(0, n - 1)
 
-                if current == start:
-                    break
+        reverse(0, k - 1)
 
-            start += 1
+        reverse(k, n - 1)
