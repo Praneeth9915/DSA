@@ -5,10 +5,6 @@ class Solution:
         """
         n = len(nums)
 
-        temp = [0] * n
+        k %= n
 
-        for i in range(n):
-            temp[(i + k) % n] = nums[i]
-
-        for i in range(n):
-            nums[i] = temp[i]
+        nums[:] = nums[-k:] + nums[:-k]
