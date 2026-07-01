@@ -5,18 +5,17 @@ class Solution:
         for num in nums:
             freq[num] = freq.get(num, 0) + 1
 
-        heap = []
+        bucket = [[] for _ in range(len(nums) + 1)]
 
         for num, count in freq.items():
-
-            heapq.heappush(heap, (count, num))
-
-            if len(heap) > k:
-                heapq.heappop(heap)
+            bucket[count].append(num)
 
         ans = []
 
-        while heap:
-            ans.append(heapq.heappop(heap)[1])
+        for i in range(len(bucket) - 1, 0, -1):
 
-        return ans
+            for num in bucket[i]:
+                ans.append(num)
+
+                if len(ans) == k:
+                    return ans
